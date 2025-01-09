@@ -19,15 +19,19 @@ function Gameboard() {
     // UI will eventually need to render it.
     const getBoard = () => board;
   
-    // In order to drop a piece, we need to find what the lowest point of the
-    // selected column is, *then* change that cell's value to the player number
+    // In order to add a piece , we need to make sure the X or O has not already been played in that row or column
+    // selected column and row are checked for value using getValue
+    // if they exist then we return false to our playround and do not switch player
     const playPiece = (row, column, player) => {
-      // Our board's outermost array represents the row,
-      // so we need to loop through the rows, starting at row 0,
-      // find all the rows that don't have a piece, then take the
-      // last one, which will represent the bottom-most empty cell
-    
+      // Our board's outermost array represents the row, innermost is the columns
+      // 
+      console.log(`Board column in playPiece function is ${board[row][column].getValue()}`)
+      if (board[row][column].getValue() == "X" | board[row][column].getValue() == "O"){
+        console.log("Invalid piece placement");
+        return false;
+      }
       board[row][column].addPiece(player);
+      return true;
     };
   
     // This method will be used to print our board to the console.
@@ -108,13 +112,16 @@ function Gameboard() {
       console.log(
         ` ${getActivePlayer().name} plays ${getActivePlayer().piece} into column ${column} and row ${row}`
       );
-      board.playPiece(row, column, getActivePlayer().piece);
+      let valid = board.playPiece(row, column, getActivePlayer().piece);
   
       /*  This is where we would check for a winner and handle that logic,
           such as a win message. */
   
-      // Switch player turn
-      switchPlayerTurn();
+      // Switch player turn if the playRound was valid
+      if (valid) {
+        switchPlayerTurn();
+      }
+     
       printNewRound();
     };
   
