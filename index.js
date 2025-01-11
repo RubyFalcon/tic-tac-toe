@@ -39,7 +39,7 @@ function Gameboard() {
     // but we won't need it after we build our UI
     const printBoard = () => {
       const boardWithCellValues = board.map((row) => row.map((cell) => cell.getValue()))
-      console.log(boardWithCellValues);
+      console.table(boardWithCellValues);
     };
   
     // Here, we provide an interface for the rest of our
@@ -83,17 +83,17 @@ function Gameboard() {
     gameOverValue = false,
   ) {
     const board = Gameboard();
-    console.log(board.getBoard()[0])
+  
     const getBoardVal = (row,col) => board.getBoard()[row][col].getValue();
     const getRowVal = (row) =>  {
       let myRow = []
       for( let  i = 0; i <  board.getBoard()[row].length; i++) {
         myRow.push(board.getBoard()[row][i].getValue())
-        // console.log(`pushed item : ${i} into array`)
+  
       }
       return myRow;
     }
-    // console.log(`row 1 in our board is:  ${getRowVal(0)}`);
+   
     const players = [
       {
         name: playerOneName,
@@ -113,7 +113,6 @@ function Gameboard() {
 
     const isgameOver  = () => {
       if(allequal(getRowVal(0))){
-        console.log("we got here")
         gameOver = true;
     winner = getBoardVal(0,0)
 
@@ -145,7 +144,7 @@ winner = getBoardVal(0,2)
           gameOver = true;
  winner = getBoardVal(0,0)
 }
-     if(allequal([getBoardVal(0,2), getBoardVal(1,2), getBoardVal(2,0)])){
+     if(allequal([getBoardVal(0,2), getBoardVal(1,1), getBoardVal(2,0)])){
           gameOver = true;
    winner = getBoardVal(0,2)
 }
@@ -174,13 +173,8 @@ winner = getBoardVal(0,2)
   
       // Switch player turn if the playRound was valid
       if (valid) {
-        console.log(`Valid is currently ${valid}`)
         isgameOver();
-        console.log(`game over is currently ${gameOver} and winner is ${winner}`);
         switchPlayerTurn();
-        
-        
-
       }
       if(!gameOver){
         printNewRound();
@@ -189,7 +183,7 @@ winner = getBoardVal(0,2)
       }
       else if(gameOver) {
         console.log(`Game over ${winner} won the game`);
-
+         game = GameController();
       }
       
       
@@ -207,4 +201,4 @@ winner = getBoardVal(0,2)
     };
   }
   
-  const game = GameController();
+ let game = GameController();
