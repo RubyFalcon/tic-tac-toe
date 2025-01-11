@@ -149,7 +149,7 @@ winner = getBoardVal(0,2)
           gameOver = true;
    winner = getBoardVal(0,2)
 }
-
+ 
     }
   let activePlayer = players[0];
     const switchPlayerTurn = () => {
@@ -175,13 +175,25 @@ winner = getBoardVal(0,2)
       // Switch player turn if the playRound was valid
       if (valid) {
         console.log(`Valid is currently ${valid}`)
-        gameOver = isgameOver();
+        isgameOver();
+        console.log(`game over is currently ${gameOver} and winner is ${winner}`);
         switchPlayerTurn();
         
-      }
+        
 
-     
-      printNewRound();
+      }
+      if(!gameOver){
+        printNewRound();
+          
+         
+      }
+      else if(gameOver) {
+        console.log(`Game over ${winner} won the game`);
+
+      }
+      
+      
+      
     };
   
     // Initial play game message
