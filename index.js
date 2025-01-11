@@ -148,7 +148,7 @@ winner = getBoardVal(0,2)
           gameOver = true;
    winner = getBoardVal(0,2)
 }
- 
+  return gameOver;
     }
   let activePlayer = players[0];
     const switchPlayerTurn = () => {
@@ -183,7 +183,7 @@ winner = getBoardVal(0,2)
       }
       else if(gameOver) {
         console.log(`Game over ${winner} won the game`);
-         game = GameController();
+        
       }
       
       
@@ -197,8 +197,81 @@ winner = getBoardVal(0,2)
     // getActivePlayer for the UI version, so I'm revealing it now
     return {
       playRound,
-      getActivePlayer
+      getActivePlayer,
+      getBoard: board.getBoard,
+      isgameOver
     };
   }
   
- let game = GameController();
+
+  //DOM function
+
+  function ScreenController(){
+    let game = GameController();
+    let playerTurn = document.querySelector(".turn");
+    let container = document.querySelector(".container")
+
+    const boardDiv = document.querySelector(".board");
+
+
+    const updateScreen = () => {
+      //board clear
+      
+      console.log(game.isgameOver())
+      
+      
+  
+      boardDiv.textContent = "";
+
+      //get newest version of board and player
+      const board = game.getBoard();
+      const activePlayer = game.getActivePlayer();
+
+
+      // 
+      //Display player turn
+       playerTurn.textContent = `${activePlayer.name}'s turn...`;
+      
+       // event listener for board
+       function clickHandlerBoard(e) {
+        const selectedColumn = e.target.dataset.column;
+        const selectedRow = e.target.dataset.row;
+        // Make sure I've clicked a column and not the gaps in between
+        if (!selectedColumn || !selectedRow) return;
+        game.playRound(selectedRow,selectedColumn);
+        updateScreen();
+      }
+      //render each square
+      board.forEach((row,rowIndex) => {
+        row.forEach((cell, index) => {
+          const cellButton = document.createElement("button");
+          cellButton.classList.add("cell");
+          cellButton.dataset.column = index;
+          cellButton.dataset.row = rowIndex;
+          cellButton.textContent = cell.getValue();
+          cellButton.addEventListener("click", clickHandlerBoard);
+          boardDiv.appendChild(cellButton);
+        });  
+        
+        if (game.isgameOver()) {
+
+          playerTurn.textContent = `Game over ${activePlayer.name} has won`;
+          const playButton = document.createElement("button");
+          playButton.classList.add("play")
+          playButton.textContent = "PLay again"
+          playButton.addEventListener("click", ()=> { 
+            game = GameController()
+          });
+          container.appendChild(playButton)
+        }
+
+        
+      });
+
+      
+
+    }
+     // Initial render
+     updateScreen();
+  }
+  ScreenController();
