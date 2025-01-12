@@ -5,7 +5,7 @@
   --header-color-hovered: #1f1e1e;
   --fast-transition: all 0.15s ease-out;
   --base-transition: all 0.3s  ease-out;
-  
+  --purple : #9e00fa;
 }
 
 /* 1. Use a more-intuitive box-sizing model */
@@ -112,7 +112,7 @@ a:hover svg {
 }
 
 a:hover svg path {
-  fill: var(--yellow);
+  fill: var(--purple);
 }
 a svg{
   transition: var(--base-transition);
@@ -151,7 +151,7 @@ a svg{
     border: 1px solid white;
     background: var(--main-color);
     cursor: pointer;
-    color: var(--white);
+    color: var(--purple);
   }
 
   .cell:hover {
@@ -171,3 +171,5 @@ a svg{
 .play:hover {
   background-color: var(--header-color-hovered);
 }
+
+.material-icons.md { font-size: 2.5rem; }
