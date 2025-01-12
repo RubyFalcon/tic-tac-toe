@@ -253,22 +253,24 @@ winner = getBoardVal(0,2)
           boardDiv.appendChild(cellButton);
         });  
         
-        if (game.isgameOver()) {
-
-          playerTurn.textContent = `Game over ${activePlayer.name} has won`;
-          const playButton = document.createElement("button");
-          playButton.classList.add("play")
-          playButton.textContent = "PLay again"
-          playButton.addEventListener("click", ()=> { 
-            game = GameController()
-          });
-          container.appendChild(playButton)
-        }
 
         
       });
 
-      
+     
+      if (game.isgameOver()) {
+        resetTime = false;
+        playerTurn.textContent = `Game over ${activePlayer.name} has won`;
+        const playButton = document.createElement("button");
+        playButton.classList.add("play")
+        playButton.textContent = "PLay again"
+        playButton.addEventListener("click", ()=> { 
+          game = GameController();
+          updateScreen();
+          container.removeChild(playButton);
+        });
+        container.appendChild(playButton)
+      } 
 
     }
      // Initial render
