@@ -83,7 +83,7 @@ function Gameboard() {
     gameOverValue = false,
   ) {
     const board = Gameboard();
-  
+    
     const getBoardVal = (row,col) => board.getBoard()[row][col].getValue();
     const getRowVal = (row) =>  {
       let myRow = []
@@ -108,7 +108,7 @@ function Gameboard() {
     let gameOver = gameOverValue;
   
     
-
+    const setPlayerName = (playerName, index) => players[index].name = playerName;
     const allequal = arr => arr.every(v => v !== " " &&  v === arr[0]);
 
     const isgameOver  = () => {
@@ -199,7 +199,8 @@ winner = getBoardVal(0,2)
       playRound,
       getActivePlayer,
       getBoard: board.getBoard,
-      isgameOver
+      isgameOver,
+      setPlayerName
     };
   }
   
