@@ -110,7 +110,11 @@ function Gameboard() {
     
     const setPlayerName = (playerName, index) => players[index].name = playerName;
     const allequal = arr => arr.every(v => v !== " " &&  v === arr[0]);
-
+    const isDraw = () => {
+      return board.getBoard().every(row => 
+        row.every(cell => cell.getValue() !== " ")
+      );
+    }
     const isgameOver  = () => {
       if(allequal(getRowVal(0))){
         gameOver = true;
@@ -200,6 +204,7 @@ winner = getBoardVal(0,2)
       getActivePlayer,
       getBoard: board.getBoard,
       isgameOver,
+      isDraw,
       setPlayerName
     };
   }
@@ -257,21 +262,22 @@ winner = getBoardVal(0,2)
 
         
       });
-
+      const playButton = document.querySelector(".play");
+      playButton.classList.add("play")
+      playButton.addEventListener("click", ()=> { 
+        game = GameController();
+        updateScreen();
+      });
+      container.appendChild(playButton)
      
       if (game.isgameOver()) {
         resetTime = false;
         playerTurn.textContent = `Game over ${activePlayer.name} has won`;
-        const playButton = document.createElement("button");
-        playButton.classList.add("play")
-        playButton.textContent = "PLay again"
-        playButton.addEventListener("click", ()=> { 
-          game = GameController();
-          updateScreen();
-          container.removeChild(playButton);
-        });
-        container.appendChild(playButton)
+       
       } 
+      else if (game.isDraw()){
+        playerTurn.textContent = "Game over its a draw"
+      }
 
     }
      // Initial render

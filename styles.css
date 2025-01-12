@@ -1,4 +1,129 @@
+:root {
+  --main-color : #e5e9f1;
+  --header-color: #ff4c05;
+  --white: #ffffff;
+  --yellow: #ff8a05;
+  --fast-transition: all 0.15s ease-out;
+  --base-transition: all 0.3s  ease-out;
+  
+}
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+  height: 100vh;
+  font-family: 'Roboto' , sans-serif;
+
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+a, a *, button, button * {
+  cursor: pointer;
+  transition: var(--fast-transition);
+}
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+.grid {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: minmax(13vh, 1fr) 7fr;
+  
+}
+
+
+header {
+  background-color: var(--white);
+  display:  flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.title , .github {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 3rem;
+  gap: .7rem;
+}
+
+
+.github {
+  margin-right: 2rem;
+}
+
+.title h1 {
+  font-size: 2rem;
+}
+main {
+  background-color: var(--main-color);
+  box-shadow: inset -1px 4px 10px 0px #d9d1d1;
+}
+
+svg {
+  height: 2.5rem;
+  width: 2.5rem;  
+}
+
+.github svg path {
+  fill: var(--header-color);
+}
+a:hover svg {
+  transform:rotate(360deg) scale(1.5);
+  filter: drop-shadow(0 0 0.3em var(--yellow));
+}
+
+a:hover svg path {
+  fill: var(--yellow);
+}
+a svg{
+  transition: var(--base-transition);
+  
+}
+.container h1 {
+  margin-top: 2rem;
+  text-align: center;
+}
 .board {
+  margin: 5rem auto;
     display: grid;
     height: 500px;
     width: 500px;
@@ -19,4 +144,8 @@
     border: 1px solid grey;
     background: lightyellow;
     cursor: pointer;
+  }
+
+  .cell:hover {
+    background-color: #f5f1bb;
   }
