@@ -148,8 +148,8 @@ a svg{
     align-items: center;
     text-align: center;
     font-size: 2rem;
-    border: 1px solid black;
-    background: var(--header-color);
+    border: 1px solid white;
+    background: var(--main-color);
     cursor: pointer;
     color: var(--white);
   }
