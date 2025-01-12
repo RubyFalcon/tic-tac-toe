@@ -2,7 +2,7 @@
   --main-color : #121212;
   --header-color: #292929;
   --white: #ffffff;
-  --yellow: #ff8a05;
+  --header-color-hovered: #1f1e1e;
   --fast-transition: all 0.15s ease-out;
   --base-transition: all 0.3s  ease-out;
   
@@ -149,13 +149,13 @@ a svg{
     text-align: center;
     font-size: 2rem;
     border: 1px solid black;
-    background: #292929cb;
+    background: var(--header-color);
     cursor: pointer;
     color: var(--white);
   }
 
   .cell:hover {
-    background-color: var(--main-color);
+    background-color: var(--header-color-hovered);
   }
 
 .play {
@@ -166,4 +166,8 @@ a svg{
   color: white;
   border-radius: 2rem;
   padding:  .5rem 2rem;
+}
+
+.play:hover {
+  background-color: var(--header-color-hovered);
 }
